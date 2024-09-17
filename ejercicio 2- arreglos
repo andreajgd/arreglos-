@@ -1,0 +1,127 @@
+using System;
+
+namespace ejercicio2__Arreglos
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            //arreglo para representar los asientos (0 = libre, 1 = ocupado)
+            int[] asientos = new int[10];
+            int op; //opcion
+            bool Sdisp = false; //asiento smoking disponible
+            bool NSdisp = false; //asiento nonsmoking dispoble
+            char resp;
+            bool asientodispo = false;  //verifica que el asiento este disponible 
+            bool fumardisp = false;
+
+                Console.WriteLine("Sistema de Reservaciones de Aerolínea.");
+                Console.WriteLine("Digite el lugar de preferencia:");
+                Console.WriteLine("1. Smoking");
+                Console.WriteLine("2. Nonsmoking");
+                Console.Write("Opción: ");
+                op = int.Parse(Console.ReadLine());
+
+                if (op == 1) //si el usuario escoge la opción smoking
+                    
+                    for (int i = 1; i <= 5; i++) 
+                    {
+                        if (asientos[i] == 0) 
+                        {
+                            asientos[i] = 1;  //si el asiento no se ha reservado, se iguala a 1, para marcarlo como reservado 
+                            Console.WriteLine($"Tu asiento es el {i + 1}, en la sección smoking.");
+                            Sdisp = true;  //se actualiza asiento disponible como true (ocupado)
+                            break;  //finaliza el ciclo
+                        }
+                    }
+
+                    if (!Sdisp)   //si los asientos smoking estan ocupado (true), busca dentro de los asientos nonsmoking
+                                  //y actuliza el asiento ocupado dentro de nonsmoking
+                    {
+                        
+                        for (int i = 6; i <= 10; i++)
+                        {
+                            if (asientos[i] == 0)
+                            {
+                                NSdisp = true;
+                                break;
+                            }
+                        }
+
+                        if (NSdisp)  //si la sección nonsmoking no esta ocupada, se solicita el cambio de sección al usuario  
+                        {
+                            Console.WriteLine("La sección smoking está llena. Desea ir a la sección nonsmoking? (s/n)");
+                            resp = char.Parse(Console.ReadLine());
+                            if (resp == 's' || resp == 'S')
+                            {
+                                for (int i = 5; i <= 9; i++)
+                                {
+                                    if (asientos[i] == 0)
+                                    {
+                                        asientos[i] = 1;  //ocupado
+                                        Console.WriteLine($"Tu asiento es el {i + 1}, en la sección nonsmoking.");
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("El próximo vuelo se va en 3 horas...");
+                            }
+                        }
+                       
+                    }
+                
+                else if (op == 2) //si el usuario selecciona opción nonsmoking
+                {
+                    for (int i = 6; i <= 10; i++)
+                    {
+                        if (asientos[i] == 0)
+                        {
+                            asientos[i] = 1;
+                            Console.WriteLine($"Tu asiento es el {i + 1}, en la sección nonsmoking.");
+                            asientodispo = true;    //se almacena como ocupado (true)
+                            break;
+                        }
+                    }
+
+                    if (!asientodispo)  //se vuelve a evaluar que no este lleno, y le pregunta al usuario si desea realizar el cambio de sección.
+                    {
+                        
+                        for (int i = 0; i <= 4; i++)
+                        {
+                            if (asientos[i] == 0)
+                            {
+                                fumardisp = true;
+                                break;
+                            }
+                        }
+
+                        if (fumardisp)
+                        {
+                            Console.WriteLine("La sección nonsmoking está llena. Desea ir a la secciín smoking? (s/n)");
+                            resp = char.Parse(Console.ReadLine());
+                            if (resp == 's' || resp == 'S')
+                            {
+                                for (int i = 0; i <= 4; i++)
+                                {
+                                    if (asientos[i] == 0)
+                                    {
+                                        asientos[i] = 1;
+                                        Console.WriteLine($"Tu asiento es el {i + 1}, en la sección smoking.");
+                                        break;
+                                    }
+                                }
+                            }
+                            else  // si el usuario no desea cambiarse de sección, aparece ese mensaje.
+                            {
+                                Console.WriteLine("El próximo vuelo se va en 3 horas...");
+                            }
+                        }
+                       
+                    }
+                }
+            }
+        }
+    }
+
