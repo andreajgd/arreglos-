@@ -1,0 +1,81 @@
+
+
+using System;
+namespace ejercicio4_arreglos
+{
+    public class Program
+    { 
+
+        public static void Main(string[] args)
+        {
+            int semana;
+            float total=0;
+            int[] matriz = new int[9]; //matriz con las 9 posibilidades de salario
+            int num;
+
+            Console.Write("Número de vendedores: ");
+            num = int.Parse(Console.ReadLine());
+
+            for (int i = 0; i < num; i++)
+            {
+                Console.Write("Ventas del vendedor " + (i + 1) + ": ");
+                semana = int.Parse(Console.ReadLine());
+
+                total = (semana * 9) / 100;
+                total = (semana - total) + 200; //salario total 
+
+                if (total >= 200 && total <= 299)  //evalua el rango de cada salario y se suma 1 al valor, estableciendole un indice a cada rango 
+                {
+                    matriz[0]++;  //indice 0 con rango 200-299
+                }
+                else if (total >= 300 && total <= 399)
+                {
+                    matriz[1]++; //indice 1 con rango 300-399
+                }
+                else if (total >= 400 && total <= 499)
+                {
+                    matriz[2]++;  //indice 2 con rango 400-499
+                }
+
+                else if (total >= 500 && total <= 599)
+                {
+                    matriz[3]++;  //indice 3 con rango 500-599
+                }
+                else if (total >= 600 && total <= 699)
+                {
+                    matriz[4]++;  //indice 4 con rango 600-699
+                }
+                else if (total >= 700 && total <= 799)
+                {
+                    matriz[5]++;  //indice 5 con rango 700-799
+                }
+                else if (total >= 800 && total <= 899)
+                {
+                    matriz[6]++;   //indice 6 con rango 800-899
+                }
+                else if (total >= 900 && total <= 999)
+                {
+                    matriz[7]++;  //indice 7 con rango 900-999
+                }
+                else if (total >= 1000)
+                {
+                    matriz[8]++;  //indice 8 de 1000 en adelante
+                }
+            }
+            //impresion de cantidad de trabajadores con rango de salario en especifico
+            Console.WriteLine("\nNúmero de vendedores en cada rango de salario:");
+            Console.WriteLine("$200-$299: " + matriz[0]);
+            Console.WriteLine("$300-$399: " + matriz[1]);
+            Console.WriteLine("$400-$499: " + matriz[2]);
+            Console.WriteLine("$500-$599: " + matriz[3]);
+            Console.WriteLine("$600-$699: " + matriz[4]);
+            Console.WriteLine("$700-$799: " + matriz[5]);
+            Console.WriteLine("$800-$899: " + matriz[6]);
+            Console.WriteLine("$900-$999: " + matriz[7]);
+            Console.WriteLine("$1000 o superior: " + matriz[8]);
+
+            Console.ReadKey();
+        }
+    }
+}
+
