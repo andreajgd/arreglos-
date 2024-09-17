@@ -1,0 +1,32 @@
+using System;
+
+namespace ejercicio1__Arreglos
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+             
+            int[] rep= new int[13]; //arreglo para para llevar cuenta del número de veces que aparece cada suma posible
+            Random rand = new Random();
+
+            for (int i = 0; i < 36000; i++)
+            {
+                int dado1 = rand.Next(1, 7); //primer dado
+                int dado2 = rand.Next(1, 7); //segundo dado 
+
+                int suma = dado1 + dado2; //suma entre dado 1 y 2
+
+                rep[suma]++;  //evalua que este dentro del rango establecido (2-12), si lo esta, se le suma 1 a esa posición
+            }
+
+            Console.WriteLine("Suma\tRepetición");
+            for (int suma = 2; suma <= 12; suma++)   
+            {
+                Console.WriteLine(suma+ "\t"+ rep[suma]);
+            }
+            Console.ReadKey();  
+        }
+    }
+}
+
