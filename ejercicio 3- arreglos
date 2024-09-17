@@ -1,0 +1,71 @@
+using System;
+
+namespace ejerciciio3_arreglo
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            int vendedores = 4;
+            int productos = 5;
+            int vendido;
+            int[,] matriz = new int[productos, vendedores];
+
+            char op;
+            do
+            {
+                Console.Write("Número del vendedor: ");
+                int vendedor = int.Parse(Console.ReadLine()) -1;  //se resta 1 para ajustar la matriz del 0-1
+
+                Console.Write("Número del producto: ");
+                int producto = int.Parse(Console.ReadLine())-1;
+
+                Console.Write("Valor total vendido: ");
+                vendido = int.Parse(Console.ReadLine());
+
+                matriz[producto, vendedor] += vendido;  //se guarda el valor vendido en la matriz   
+
+                Console.Write("Desea agregar otro registro? (s/n) ");
+                op = char.Parse(Console.ReadLine());
+            } while (op == 's' || op == 'S');
+
+
+            Console.Write("Producto\t");
+            for (int j = 0; j < vendedores; j++)  //itera en el numero de vendedores para escribir el numero de cada uno
+            {
+                Console.Write($"Vendedor {j + 1}\t");
+            }
+
+
+            Console.WriteLine("Total Producto");
+
+            for (int i = 0; i < productos; i++)  //recore cada producto 
+            {
+                int totalprod = 0; //se inicializa cada que es un nuevo producto
+                Console.Write($"Producto {i + 1}\t");
+
+                for (int j = 0; j < vendedores; j++)  //recorre cada vendedor 
+                {
+                    Console.Write($"{matriz[i, j],-8}\t");   //ventas realizadas por el vendedor  
+                }
+
+                Console.WriteLine($"{totalprod,-8}");
+            }
+
+            Console.Write("Total Vendedor\t");
+            for (int j = 0; j < vendedores; j++)
+            {
+                int totalvend = 0; //reiniciar total ventas para cada vendedor
+
+                for (int i = 0; i < productos; i++)
+                {
+                    totalvend += matriz[i, j]; // se suma el total de cada producto al vendedor
+                }
+
+                Console.Write($"{totalvend,-8}\t"); //se alinea a la izquierda en un ancho de 8 caracteres, y se imprime el total por cada vendedor 
+            }
+            Console.WriteLine(); 
+            Console.ReadKey(); 
+        }
+    }
+}
